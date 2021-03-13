@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  db:
+    image: mariadb
+    restart: unless-stopped
+    container_name: bairesdev-atcs-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bairesdev
+      MYSQL_USER: bairesdev
+      MYSQL_PASSWORD: bairesdev
+    volumes:
+      - mariadb-data:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    container_name: bairesdev-atcs-phalcon
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+
+volumes:
+  mariadb-data:
+
+networks:
+  default:
+    name: bairesdev-atcs
