@@ -8,9 +8,9 @@ services:
     container_name: bairesdev-atcs-db
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: bairesdev
-      MYSQL_USER: bairesdev
-      MYSQL_PASSWORD: bairesdev
+      MYSQL_DATABASE: atcs
+      MYSQL_USER: atcs
+      MYSQL_PASSWORD: atcs
     volumes:
       - mariadb-data:/var/lib/mysql
 
@@ -21,7 +21,9 @@ services:
     restart: unless-stopped
     container_name: bairesdev-atcs-phalcon
     volumes:
-      - ./src:/var/www/html
+      - ./docker/apache-site-atcs.conf:/etc/apache2/sites-available/atcs.conf
+      - ./docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
+      - .:/var/www/atcs
     ports:
       - 8080:80
     depends_on:

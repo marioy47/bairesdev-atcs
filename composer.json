@@ -1,0 +1,20 @@
+{
+    "name": "marioy47/bairesdev-atcs",
+    "description": "A interview challange",
+    "type": "project",
+    "require-dev": {
+        "phalcon/devtools": "^4.0"
+    },
+    "license": "gpl",
+    "authors": [
+        {
+            "name": "Mario Yepes",
+            "email": "myemail@example.com"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {},
+    "scripts": {
+        "phalcon": "phalcon"
+    }
+}
