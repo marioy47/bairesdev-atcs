@@ -23,7 +23,8 @@ services:
     volumes:
       - ./docker/apache-site-atcs.conf:/etc/apache2/sites-available/atcs.conf
       - ./docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
-      - .:/var/www/atcs
+      - ./api:/var/www/atcs/api
+      - ./client/build:/var/www/atcs/client
     ports:
       - 8080:80
     depends_on:

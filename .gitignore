@@ -1,5 +1,3 @@
 *~
 .DS_Store
-/tmp/
-
-/vendor/
+/api/vendor/

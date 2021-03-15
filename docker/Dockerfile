@@ -30,7 +30,7 @@ RUN set -eux \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY --chmod=755 docker/docker-entrypoint.sh /usr/local/bin/ 
-COPY . /var/www/atcs
+COPY api/ /var/www/atcs/api
 
 WORKDIR /var/www/atcs
 ENTRYPOINT ["docker-entrypoint.sh"]
