@@ -3,7 +3,7 @@ use Phalcon\Mvc\Micro;
 
 $app = new Micro();
 
-$app->get('/', function() {
+$app->get('/api', function() {
     return 'hola mundo';
 });
 

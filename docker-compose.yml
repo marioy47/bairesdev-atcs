@@ -14,24 +14,34 @@ services:
     volumes:
       - mariadb-data:/var/lib/mysql
 
-  app:
+  api:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/api/Dockerfile
     restart: unless-stopped
-    container_name: bairesdev-atcs-phalcon
+    container_name: bairesdev-atcs-api
     volumes:
-      - ./docker/apache-site-atcs.conf:/etc/apache2/sites-available/atcs.conf
-      - ./docker/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
+      - ./docker/api/apache-site-atcs.conf:/etc/apache2/sites-available/atcs.conf
+      - ./docker/api/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
       - ./api:/var/www/atcs/api
-      - ./client/build:/var/www/atcs/client
+      - node-build:/var/www/atcs/client
     ports:
       - 8080:80
     depends_on:
       - db
+      - client
+
+  client:
+    build:
+      context: .
+      dockerfile: docker/client/Dockerfile
+    container_name: bairesdev-atcs-client
+    volumes:
+      - node-build:/app/build
 
 volumes:
   mariadb-data:
+  node-build:
 
 networks:
   default:

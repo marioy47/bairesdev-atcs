@@ -2,7 +2,7 @@ FROM php:7-apache
 
 EXPOSE 80
 
-COPY docker/apache-site-atcs.conf /etc/apache2/sites-available/atcs.conf
+COPY docker/api/apache-site-atcs.conf /etc/apache2/sites-available/atcs.conf
 
 RUN set -eux \
 	&& apt-get -qq update \
@@ -29,8 +29,7 @@ RUN set -eux \
 RUN set -eux \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-COPY --chmod=755 docker/docker-entrypoint.sh /usr/local/bin/ 
-COPY api/ /var/www/atcs/api
+COPY --chmod=755 docker/api/docker-entrypoint.sh /usr/local/bin/ 
 
 WORKDIR /var/www/atcs
 ENTRYPOINT ["docker-entrypoint.sh"]
