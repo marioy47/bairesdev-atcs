@@ -13,6 +13,8 @@ services:
       MYSQL_PASSWORD: atcs
     volumes:
       - mariadb-data:/var/lib/mysql
+      - ./db:/scripts
+    working_dir: /scripts
 
   api:
     build:
@@ -23,25 +25,24 @@ services:
     volumes:
       - ./docker/api/apache-site-atcs.conf:/etc/apache2/sites-available/atcs.conf
       - ./docker/api/docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
-      - ./api:/var/www/atcs/api
-      - node-build:/var/www/atcs/client
+      - ./api:/var/www/atcs-api
+      - node-client-build:/var/www/atcs-client
     ports:
       - 8080:80
     depends_on:
       - db
-      - client
 
-  client:
-    build:
-      context: .
-      dockerfile: docker/client/Dockerfile
-    container_name: bairesdev-atcs-client
-    volumes:
-      - node-build:/app/build
+  # client:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/client/Dockerfile
+  #   container_name: bairesdev-atcs-client
+  #   volumes:
+      # - node-client-build:/app/build
 
 volumes:
   mariadb-data:
-  node-build:
+  node-client-build:
 
 networks:
   default:
