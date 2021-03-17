@@ -36,6 +36,7 @@ services:
       dockerfile: docker/client/Dockerfile
     container_name: bairesdev-atcs-client
     volumes:
+      - node-client-build:/app/build
       - ./docker/client/entrypoint.sh:/entrypoint.sh
       - ./client:/app
       - /app/node_modules
