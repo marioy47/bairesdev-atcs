@@ -1,10 +1,18 @@
 FROM node:lts-alpine
 
-COPY client/ /app
-
+# set working directory
 WORKDIR /app
 
-RUN set -eux \
-	&& yarn install \
-	&& yarn build
+ENV PATH /app/node_modules/.bin:$PATH
 
+# install app dependencies
+COPY client/package.json ./
+COPY client/package-lock.json ./
+RUN npm install --silent
+RUN npm install react-scripts@3.4.1 -g --silent
+
+# add app
+COPY client ./
+
+# start app
+CMD ["npm", "start"]
