@@ -11,7 +11,7 @@ RUN set -eux \
 	&& apt-get -qq update \
 	&& apt-get install -qq -y --no-install-recommends git libpcre3-dev libzip-dev \
     && docker-php-ext-install -j "$(nproc)" bcmath exif mysqli zip pdo pdo_mysql \
-	&& a2enmod rewrite expires \
+	&& a2enmod rewrite expires headers \
     && mkdir -p ${DOCUMENT_ROOT} \
     && chmod ugo+rx ${DOCUMENT_ROOT} \
     && a2dissite 000-default \
