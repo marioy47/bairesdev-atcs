@@ -1,16 +1,29 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+const URL = `http://localhost:8080/api/aircrafts`;
 
 const Aircrafts = () => {
   const [aircrafts, setAircrafts] = useState([]);
 
   const getAircrafts = async () => {
-    const planes = await axios.get(`http://localhost:8080/api/aircrafts`);
+    const planes = await axios.get(URL);
     if (planes.data) {
       setAircrafts(planes.data);
     }
+  };
+
+  const deleteAircraft = async (id) => {
+    const res = await axios({
+      method: "post",
+      headers: {
+        "Content-Type": "Content-Type: application/json",
+      },
+      url: URL + '/' + id 
+    });
+    console.log(res);
   };
 
   useEffect(() => {
@@ -27,6 +40,7 @@ const Aircrafts = () => {
             <th>Type</th>
             <th>Size</th>
             <th>Creation Date</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -37,6 +51,9 @@ const Aircrafts = () => {
                 <td>{item.aircraft_type}</td>
                 <td>{item.aircraft_size}</td>
                 <td>{item.created_at}</td>
+                <td>
+                  <Button onClick={() => deleteAircraft(item.id)} >Del</Button>
+                </td>
               </tr>
             );
           })}

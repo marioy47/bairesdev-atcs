@@ -1,17 +1,19 @@
 import { Form, FormControl } from "react-bootstrap";
 import {useState} from 'react';
 import axios from 'axios';
+import {useHistory} from 'react-router-dom';
 
 const AircraftsForm = () => {
 
   const [size, setSize] = useState(100);
   const [type, setType] = useState(3);
+  const history = useHistory();
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
   
     const res = await axios({
-      method: 'post',
+      method: 'delete',
       headers: {
         'Content-Type': 'Content-Type: application/json',
       },
@@ -21,7 +23,8 @@ const AircraftsForm = () => {
         aircraft_type: type,
       },
     });
-    console.log(res.data);
+
+    history.push('/aircrafts');
 
   }
     
