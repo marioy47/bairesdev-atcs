@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 
 import Home from "./components/home";
 import Aircrafts from "./components/aircrafts";
+import AircraftsForm from "./components/aircrafts-form";
 import Queue from "./components/queue";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Container className="pt-5">
           <Route exact path="/" component={Home} />
           <Route exact path="/aircrafts" component={Aircrafts} />
+          <Route exact path="/aircrafts-form" component={AircraftsForm} />
           <Route exact path="/queue" component={Queue} />
         </Container>
       </Switch>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Aircrafts = () => {
   const [aircrafts, setAircrafts] = useState([]);
@@ -41,6 +42,9 @@ const Aircrafts = () => {
           })}
         </tbody>
       </Table>
+      <Link to="/aircrafts-form" className="btn btn-primary">
+        Add new
+      </Link>
     </>
   );
 };
