@@ -5,7 +5,8 @@ import Container from "react-bootstrap/Container";
 
 import Home from "./components/home";
 import Aircrafts from "./components/aircrafts";
-import AircraftsForm from "./components/aircrafts-form";
+import AircraftsAdd from "./components/aircrafts-add";
+import AircraftsUpdate from "./components/aircrafts-update";
 import Queue from "./components/queue";
 
 function App() {
@@ -34,8 +35,9 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/aircrafts" component={Aircrafts} />
-          <Route exact path="/aircrafts-form" component={AircraftsForm} />
+          <Route exact path="/aircrafts-add" component={AircraftsAdd} />
           <Route exact path="/queue" component={Queue} />
+          <Route path="/aircrafts-update/:id" component={AircraftsUpdate} />
         </Switch>
       </Container>
     </Router>
