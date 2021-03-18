@@ -1,4 +1,4 @@
-import { Form, FormControl } from "react-bootstrap";
+import { Form, FormControl, Alert } from "react-bootstrap";
 import {useState} from 'react';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
@@ -13,7 +13,7 @@ const AircraftsForm = () => {
     ev.preventDefault();
   
     const res = await axios({
-      method: 'delete',
+      method: 'post',
       headers: {
         'Content-Type': 'Content-Type: application/json',
       },
@@ -24,8 +24,13 @@ const AircraftsForm = () => {
       },
     });
 
-    history.push('/aircrafts');
+    console.log(res);
 
+    if (res.status === 201) {
+      history.push('/aircrafts');
+    } else {
+      return <Alert variant="warning">{res.statusText}</Alert>;
+    }
   }
     
   return (

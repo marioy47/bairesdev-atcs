@@ -30,14 +30,14 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Switch>
-        <Container className="pt-5">
+      <Container className="pt-5">
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/aircrafts" component={Aircrafts} />
           <Route exact path="/aircrafts-form" component={AircraftsForm} />
           <Route exact path="/queue" component={Queue} />
-        </Container>
-      </Switch>
+        </Switch>
+      </Container>
     </Router>
   );
 }
